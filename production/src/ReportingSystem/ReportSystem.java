@@ -1,5 +1,7 @@
 package ReportingSystem;
 
+import OrderDataBase.Order;
+
 public interface ReportSystem {
-    ReportSystem displayOutputToTerminal();
+    String displayOutputToTerminal(String name, String address, Order generatingOrder);
 }

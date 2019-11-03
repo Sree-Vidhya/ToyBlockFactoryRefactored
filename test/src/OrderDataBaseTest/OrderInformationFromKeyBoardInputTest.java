@@ -31,52 +31,26 @@ public class OrderInformationFromKeyBoardInputTest {
     }
     public ArrayList testInputForBlockCollection()
     {
-        block = new Block(new Square(), new Red());
-        String redSquare = "1";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int redSquare = 1;
         blockCollection.add(redSquare);
-        block = new Block(new Square(), new Blue());
-        String blueSquare = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int blueSquare = 0;
         blockCollection.add(blueSquare);
-        block = new Block(new Square(), new Yellow());
-        String yellowSquare = "1";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int yellowSquare = 1;
         blockCollection.add(yellowSquare);
-        block = new Block(new Triangle(), new Red());
-        String redTriangle = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int redTriangle = 0;
         blockCollection.add(redTriangle );
-        block = new Block(new Triangle(), new Blue());
-        String blueTriangle = "2";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int blueTriangle = 2;
         blockCollection.add(blueTriangle );
-        block = new Block(new Triangle(), new Yellow());
-        String yellowTriangle = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int yellowTriangle = 0;
         blockCollection.add(yellowTriangle );
-        block = new Block(new Circle(), new Red());
-        String redCircle = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int redCircle = 0;
         blockCollection.add(redCircle );
-        block = new Block(new Circle(), new Blue());
-        String blueCircle = "1";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int blueCircle = 1;
         blockCollection.add(blueCircle );
-        block = new Block(new Circle(), new Yellow());
-        String yellowCircle = "2";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int yellowCircle = 2;
         blockCollection.add(yellowCircle );
         return blockCollection;
+
     }
 
     @Test
@@ -99,14 +73,14 @@ public class OrderInformationFromKeyBoardInputTest {
     public void generateNextOrderNumberReturnsNextOrderNumber() {
         blockCollection = testInputForBlockCollection();
         order = new Order("5th Nov",blockCollection);
-        assertEquals(1,order.getOrderNumer());
+        assertEquals(1,order.getNextOrderNumer());
     }
 
     @Test
     public void getOrderWithOrderNumber() {
         blockCollection = testInputForBlockCollection();
         order = new Order("5th Nov",blockCollection);
-        order.getOrderNumer();
+        order.getNextOrderNumer();
         OrderRepository repo = new OrderRepository();
         repo.addOrdertoDatabase(order);
         MockOrderInformationFromKeyBoardInput mockOrder = new MockOrderInformationFromKeyBoardInput(order);

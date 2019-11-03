@@ -12,9 +12,10 @@ public class Order {
         this.blockCollection = blockCollection;
     }
 
-    public int getOrderNumer() {
+    public int getNextOrderNumer() {
         return ++orderNumer;
     }
+    public int getOrderNumer(){return orderNumer;}
 
     public String getDueDate() {
         return dueDate;

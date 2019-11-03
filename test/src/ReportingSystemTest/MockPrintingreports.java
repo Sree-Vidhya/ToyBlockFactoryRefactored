@@ -1,4 +1,4 @@
-package ReportingSystem;
+package ReportingSystemTest;
 
 import FactoryBlockDataBase.Block;
 import FactoryBlockDataBase.Cut.Circle;
@@ -13,17 +13,39 @@ import java.util.ArrayList;
 
 import static java.lang.String.format;
 
-public class PaintingReport implements ReportSystem {
-    String dueDate;
+public class MockPrintingreports {
+    String name = "Sree";
+    String address = "1 Bob Avenue, Auckland";
+    int custID = 1;
     ArrayList blockCollection = new ArrayList();
-    int orderNumber = 0;
-    @Override
+    public ArrayList creatingBlockCollectionFromUserInput() {
+        String redSquare = "1";
+        blockCollection.add(redSquare);
+        String blueSquare = "";
+        blockCollection.add(blueSquare);
+        String yellowSquare = "1";
+        blockCollection.add(yellowSquare);
+        String redTriangle = "";
+        blockCollection.add(redTriangle );
+        String blueTriangle = "2";
+        blockCollection.add(blueTriangle );
+        String yellowTriangle = "";
+        blockCollection.add(yellowTriangle );
+        String redCircle = "";
+        blockCollection.add(redCircle );
+        String blueCircle = "1";
+        blockCollection.add(blueCircle );
+        String yellowCircle = "2";
+        blockCollection.add(yellowCircle );
+        return blockCollection;
+    }
+    Order order = new Order("12th",blockCollection );
     public String displayOutputToTerminal(String name, String address, Order generatingOrder) {
         StringBuilder stringBuilderForPrintingInNewLine = new StringBuilder();
         StringBuilder stringBuilderForPrintingInSameLine = new StringBuilder();
         StringBuilder stringBuilderForFormattingString = new StringBuilder();
-        orderNumber = generatingOrder.getOrderNumer();
-        dueDate = generatingOrder.getDueDate();
+        int orderNumber = 0001;
+        String dueDate = "12th";
         blockCollection = generatingOrder.getBlockCollection();
         stringBuilderForPrintingInNewLine.append("\n");
         stringBuilderForPrintingInNewLine.append("Your painting report has been generated:");

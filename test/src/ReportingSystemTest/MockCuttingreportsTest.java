@@ -1,6 +1,5 @@
-package ReportingSystem;
+package ReportingSystemTest;
 
-import CustomerDataBase.CustomerkeyBoardInput;
 import FactoryBlockDataBase.Block;
 import FactoryBlockDataBase.Cut.Circle;
 import FactoryBlockDataBase.Cut.Square;
@@ -9,27 +8,45 @@ import FactoryBlockDataBase.Paint.Blue;
 import FactoryBlockDataBase.Paint.Red;
 import FactoryBlockDataBase.Paint.Yellow;
 import OrderDataBase.Order;
-import OrderDataBase.OrderInformationFromKeyBoardInput;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
 import static java.lang.String.format;
+import static org.junit.Assert.*;
 
-public class CuttingReport implements ReportSystem {
-    String dueDate;
-    ArrayList blockCollection = new ArrayList();
-    int orderNumber = 0;
-    Block block;
-    @Override
-    public String displayOutputToTerminal(String name, String address, Order generatingOrder) {
+public class MockCuttingreportsTest {
+    @Test
+    public void displayOutputToTerminal() {
+        String name = "Sree";
+        String address = "1 Bob Avenue, Auckland";
+        int custID = 1;
+        Block block;
+        ArrayList blockCollection = new ArrayList();
+        int redSquare = 1;
+        blockCollection.add(redSquare);
+        int blueSquare = 0;
+        blockCollection.add(blueSquare);
+        int yellowSquare = 1;
+        blockCollection.add(yellowSquare);
+        int redTriangle = 0;
+        blockCollection.add(redTriangle );
+        int blueTriangle = 2;
+        blockCollection.add(blueTriangle );
+        int yellowTriangle = 0;
+        blockCollection.add(yellowTriangle );
+        int redCircle = 0;
+        blockCollection.add(redCircle );
+        int blueCircle = 1;
+        blockCollection.add(blueCircle );
+        int yellowCircle = 2;
+        blockCollection.add(yellowCircle );
+        Order order = new Order("12th",blockCollection );
         StringBuilder stringBuilderForPrintingInNewLine = new StringBuilder();
         StringBuilder stringBuilderForPrintingInSameLine = new StringBuilder();
         StringBuilder stringBuilderForFormattingString = new StringBuilder();
-        CustomerkeyBoardInput customer = new CustomerkeyBoardInput();
-        OrderInformationFromKeyBoardInput order = new OrderInformationFromKeyBoardInput();
-        orderNumber = generatingOrder.getNextOrderNumer();
-        dueDate = generatingOrder.getDueDate();
-        blockCollection = generatingOrder.getBlockCollection();
+        int orderNumber = 0001;
+        String dueDate = "12th";
         stringBuilderForPrintingInNewLine.append("\n");
         stringBuilderForPrintingInNewLine.append("Your cutting list has been generated:");
         stringBuilderForPrintingInNewLine.append("\n");
@@ -52,6 +69,8 @@ public class CuttingReport implements ReportSystem {
             stringBuilderForFormattingString.append(    format("%20s%20s\n", row));
         }
         stringBuilderForPrintingInNewLine.append("\n");
-        return stringBuilderForPrintingInNewLine.toString() + "\n" + stringBuilderForPrintingInSameLine.toString() + "\n" + stringBuilderForFormattingString.toString() ;
+        String expected =  stringBuilderForPrintingInNewLine.toString() + "\n" + stringBuilderForPrintingInSameLine.toString() + "\n" + stringBuilderForFormattingString.toString() ;
+        MockCuttingreports mock = new MockCuttingreports();
+        assertEquals(expected,mock.displayOutputToTerminal("Sree","1 Bob Avenue, Auckland",order));
     }
 }

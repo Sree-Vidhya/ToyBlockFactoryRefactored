@@ -30,53 +30,43 @@ public class MockOrderInformationFromKeyBoardInput implements OrderInformation {
         return order.getOrderNumer() ;
     }
 
+    public int validateKeyBoardInput(String keyBoardInputMock)
+    {
+        int changingkeyboardInputToInteger;
+        if(keyBoardInputMock.matches("")) {
+             changingkeyboardInputToInteger = 0;
+            return changingkeyboardInputToInteger;
+        }
+        else {
+            try{
+                int yourNumber = Integer.parseInt(keyBoardInputMock);
+            }catch (NumberFormatException ex) {
+                keyBoardInputMock = "0";
+            }
+            changingkeyboardInputToInteger = Integer.parseInt(keyBoardInputMock);
+            return changingkeyboardInputToInteger;
+        }
+    }
     @Override
     public ArrayList creatingBlockCollectionFromUserInput() {
         blockCollection = new ArrayList();
-        block = new Block(new Square(), new Red());
-        String redSquare = "1";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int redSquare = validateKeyBoardInput("1");
         blockCollection.add(redSquare);
-        block = new Block(new Square(), new Blue());
-        String blueSquare = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int blueSquare = validateKeyBoardInput("");
         blockCollection.add(blueSquare);
-        block = new Block(new Square(), new Yellow());
-        String yellowSquare = "1";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int yellowSquare = validateKeyBoardInput("1");
         blockCollection.add(yellowSquare);
-        block = new Block(new Triangle(), new Red());
-        String redTriangle = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int redTriangle = validateKeyBoardInput("");
         blockCollection.add(redTriangle );
-        block = new Block(new Triangle(), new Blue());
-        String blueTriangle = "2";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int blueTriangle = validateKeyBoardInput("2");
         blockCollection.add(blueTriangle );
-        block = new Block(new Triangle(), new Yellow());
-        String yellowTriangle = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int yellowTriangle = validateKeyBoardInput("");
         blockCollection.add(yellowTriangle );
-        block = new Block(new Circle(), new Red());
-        String redCircle = "";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int redCircle = validateKeyBoardInput("");
         blockCollection.add(redCircle );
-        block = new Block(new Circle(), new Blue());
-        String blueCircle = "1";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int blueCircle = validateKeyBoardInput("1");
         blockCollection.add(blueCircle );
-        block = new Block(new Circle(), new Yellow());
-        String yellowCircle = "2";
-        blockCollection.add(block.getShape().getShape());
-        blockCollection.add(block.getColor().getColor());
+        int yellowCircle = validateKeyBoardInput("2");
         blockCollection.add(yellowCircle );
         return blockCollection;
     }
@@ -88,10 +78,6 @@ public class MockOrderInformationFromKeyBoardInput implements OrderInformation {
         order = new Order(dueDate,blockCollection);
         return order;
     }
-//    public int getOrderNumberToSearchInTheRepository(1)
-//    {
-//        return orderNumber;
-//    }
 
     @Override
     public Order getOrderWithOrderNumber(int orderNumber) {

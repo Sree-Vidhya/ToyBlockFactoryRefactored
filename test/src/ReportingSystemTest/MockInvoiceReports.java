@@ -1,6 +1,5 @@
-package ReportingSystem;
+package ReportingSystemTest;
 
-import CustomerDataBase.CustomerkeyBoardInput;
 import FactoryBlockDataBase.Block;
 import FactoryBlockDataBase.Cut.Circle;
 import FactoryBlockDataBase.Cut.Square;
@@ -8,35 +7,68 @@ import FactoryBlockDataBase.Cut.Triangle;
 import FactoryBlockDataBase.Paint.Blue;
 import FactoryBlockDataBase.Paint.Red;
 import FactoryBlockDataBase.Paint.Yellow;
-import FactoryBlockDataBase.Shape;
 import OrderDataBase.Order;
-import OrderDataBase.OrderInformationFromKeyBoardInput;
 
 import java.util.ArrayList;
 
 import static java.lang.String.format;
-
-public class InvoiceReport implements ReportSystem {
-    String dueDate;
+public class MockInvoiceReports {
+    String name = "Sree";
+    String address = "1 Bob Avenue, Auckland";
+    int custID = 1;
     ArrayList blockCollection = new ArrayList();
-    int orderNumber = 0;
-    @Override
+    public int validateKeyBoardInput(String keyBoardInputMock)
+    {
+        int changingkeyboardInputToInteger;
+        if(keyBoardInputMock.matches("")) {
+            changingkeyboardInputToInteger = 0;
+            return changingkeyboardInputToInteger;
+        }
+        else {
+            try{
+                int yourNumber = Integer.parseInt(keyBoardInputMock);
+            }catch (NumberFormatException ex) {
+                keyBoardInputMock = "0";
+            }
+            changingkeyboardInputToInteger = Integer.parseInt(keyBoardInputMock);
+            return changingkeyboardInputToInteger;
+        }
+    }
+    public ArrayList creatingBlockCollectionFromUserInput() {
+        int redSquare = validateKeyBoardInput("1");
+        blockCollection.add(redSquare);
+        int blueSquare = validateKeyBoardInput("");
+        blockCollection.add(blueSquare);
+        int yellowSquare = validateKeyBoardInput("1");
+        blockCollection.add(yellowSquare);
+        int redTriangle = validateKeyBoardInput("");
+        blockCollection.add(redTriangle );
+        int blueTriangle = validateKeyBoardInput("2");
+        blockCollection.add(blueTriangle );
+        int yellowTriangle = validateKeyBoardInput("");
+        blockCollection.add(yellowTriangle );
+        int redCircle = validateKeyBoardInput("");
+        blockCollection.add(redCircle );
+        int blueCircle = validateKeyBoardInput("1");
+        blockCollection.add(blueCircle );
+        int yellowCircle = validateKeyBoardInput("2");
+        blockCollection.add(yellowCircle );
+        return blockCollection;
+    }
+    Order order = new Order("12th",blockCollection );
     public String displayOutputToTerminal(String name, String address, Order generatingOrder) {
         StringBuilder stringBuilderForPrintingInNewLine = new StringBuilder();
         StringBuilder stringBuilderForPrintingInSameLine = new StringBuilder();
         StringBuilder stringBuilderForFormattingString = new StringBuilder();
         StringBuilder stringBuilderForPrintingInNewLineForPrices = new StringBuilder();
-        CustomerkeyBoardInput customer = new CustomerkeyBoardInput();
-        OrderInformationFromKeyBoardInput order = new OrderInformationFromKeyBoardInput();
-        orderNumber = generatingOrder.getOrderNumer();
-        dueDate = generatingOrder.getDueDate();
+        int orderNumber = 0001;
+        String dueDate = "12th";
         blockCollection = generatingOrder.getBlockCollection();
         stringBuilderForPrintingInNewLine.append("\n");
         stringBuilderForPrintingInNewLine.append("Your invoice report has been generated:");
         stringBuilderForPrintingInNewLine.append("\n");
-        stringBuilderForPrintingInNewLine.append("---------------------------------------");
-        stringBuilderForPrintingInSameLine.append("Name: "+name +" "+ "Address: " + address+" "+ "Due Date: " + dueDate + " "+ "Order #: "+String.format("%04d%n", orderNumber));
-        stringBuilderForPrintingInNewLine.append("\n");
+        stringBuilderForPrintingInNewLine.append("----------------------------------------");
+        stringBuilderForPrintingInSameLine.append("Name: "+name +" "+ "Address: " + address+" "+ "Due Date: " + dueDate + " "+ "Order #: "+ format("%04d%n", orderNumber));
         final Object[][] table = new String[4][];
         String redSquare = String.valueOf( blockCollection.get(0));
         String blueSquare = String.valueOf(blockCollection.get(1));
@@ -47,12 +79,10 @@ public class InvoiceReport implements ReportSystem {
         String redCircle = String.valueOf(blockCollection.get(6));
         String blueCircle = String.valueOf(blockCollection.get(7));
         String yellowCircle = String.valueOf(blockCollection.get(8));
-
         Block squareInRed = new Block(new Square(),new Red());
         Block triangleInBlue = new Block(new Triangle(),new Blue());
         Block circleInYellow = new Block(new Circle(),new Yellow());
         int redTotal = (Integer.parseInt(redSquare)+Integer.parseInt(redTriangle)+Integer.parseInt(redCircle));
-
         table[0] = new String[] { "  ",squareInRed.getColor().getColor() , triangleInBlue.getColor().getColor(), circleInYellow.getColor().getColor()};
         table[1] = new String[] { squareInRed.getShape().getShape(),redSquare,blueSquare,yellowSquare};
         table[2] = new String[] { triangleInBlue.getShape().getShape(), redTriangle ,blueTriangle,yellowTriangle };

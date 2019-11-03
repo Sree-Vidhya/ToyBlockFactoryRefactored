@@ -18,8 +18,8 @@ public class OrderTest {
     ArrayList blockCollection = new ArrayList();
     Order order = new Order(dueDate,blockCollection);
     @Test
-    public void getOrderNumerReturnsOrderNumber() {
-        assertEquals(1,order.getOrderNumer());
+    public void getNextOrderNumerReturnsNextOrderNumber() {
+        assertEquals(1,order.getNextOrderNumer());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class OrderTest {
         assertEquals(blockCollection,order.getBlockCollection());
     }
     @Test
-    public void generateNextOrderNumberReturnsNextOrderNumber() {
-        assertEquals(1,order.getOrderNumer());
+    public void generateOrderNumberReturnsOrderNumber() {
+        assertEquals(0,order.getOrderNumer());
     }
 }
